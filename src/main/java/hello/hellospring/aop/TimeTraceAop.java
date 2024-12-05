@@ -3,10 +3,10 @@ package hello.hellospring.aop;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
 @Aspect
-@Controller
+@Component
 public class TimeTraceAop {
 
     @Around("execution(* hello.hellospring..*(..))")
@@ -16,8 +16,8 @@ public class TimeTraceAop {
         try {
             return joinPoint.proceed();
         }finally {
-            long end = System.currentTimeMillis();
-            long timeMs = end - start;
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
             System.out.println("END: " + joinPoint.toString() + " " + timeMs + " ms");
         }
     }
